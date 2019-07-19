@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import CharCard from './CharCard.js';
 import axios from 'axios';
+import 'semantic-ui-css/semantic.min.css';
+import { Card} from 'semantic-ui-react';
 
 const CharGrid = () => {
-    const [charData, setCharData] = useState();
+    const [charData, setCharData] = useState([]);
 
     useEffect( () => {
         axios
@@ -20,8 +22,12 @@ const CharGrid = () => {
     }, [])
 
     return (
-        <div>
-            {/* { name } */}
+        <div className='char-grid'>
+            <Card.Group>
+                { charData.map(char => {
+                    return <CharCard char={ char }/>;
+                })}
+            </Card.Group>
         </div>
     )
 }
